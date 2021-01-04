@@ -1,7 +1,50 @@
+html,body{ 
+  height: 100%;  
+
+}
+ /*LOGOS FOR SOCIAL MEDIA */
+.media ul {  /*PUTTING LOCATION OF WHERE THE SOCIAL MEDIA SHOULD BE*/
+    position:absolute; 
+    top: 80%;
+    left: 50%;
+    padding: 0;
+    margin: 0;
+    transform: translate(-50%,-70%);
+    display: flex;
+}
+
+.media ul li { /*SETTING MARGINS AND TAKING AWAY UGLY DOTS ON LIST*/
+    list-style: none;
+    margin: 0 15px;
+}
+
+.media ul li .fa { /*CHANGES THE FONT */
+    font-style: 600px;
+    line-height: 60px;
+    transition: .6s;
+    color: #000;
+
+}
+.media ul li a {
+    position: relative;
+    display: block;
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    background-color: #fff;
+    text-align: center;
+    transition: .6s;
+    box-shadow: 0 5px 4px rgba(0,0,0,.5);
+
+}
+
+.media ul li a:hover {
+    transform: translate(0,-10px)
+}
 .name {
-    color :red;
+    color :white;
     font-size: 64px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Segoe UI, Roboto, Arial, Helvetica, sans-serif;
     font-weight: bold;
     font-style: italic;
     margin:0%;
@@ -14,11 +57,26 @@
     
 }
 
+.desc1{  
+    position: relative;
+    color :white;
+    font-size: 24px;
+    font-family: Segoe UI, Helvetica, sans-serif;
+    font-weight: bold;
+    font-style: italic;
+    margin:0%;
+    padding: 0%;
+
+    position:absolute; 
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%,-50%);
+}
+
+
 body {
-    background-color: seagreen;
-    background-image: url(frog.jpg);
+    background-color: black;
+    background-image: url(toronto.jpg);
     background-size: cover;
     background-repeat: no-repeat;
-
-
 }
