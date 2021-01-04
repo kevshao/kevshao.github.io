@@ -1,0 +1,24 @@
+.name {
+    color :red;
+    font-size: 64px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-style: italic;
+    margin:0%;
+    padding: 0%;
+
+    position:absolute; 
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    
+}
+
+body {
+    background-color: seagreen;
+    background-image: url(frog.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+
+
+}
