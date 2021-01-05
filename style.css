@@ -9,7 +9,24 @@ html,body{
 /*BREAK POINTS */
 /*RESPONSIVENESS */
 
-@media (max-width: 900px) /*SMALLEST SCREEN POSSIBLE */
+@media (max-width: 600px) /*SMALLEST SCREEN POSSIBLE */
+{
+    .name 
+    {
+         font-size: 35px;
+         margin-top: 20vh;
+         padding: 0%;  
+    }
+
+    .desc1
+   {
+        margin-top: -10vh;
+        padding: 0%;
+        font-size: 15px;
+   }
+}
+
+@media (min-width: 601px) /*SMALLEST SCREEN POSSIBLE */
 {
     .name 
     {
@@ -26,7 +43,7 @@ html,body{
    }
 }
 
-@media (min-width: 901px) /*2nd SMALLEST SCREEN POSSIBLE*/
+@media (min-width: 900px) /*2nd SMALLEST SCREEN POSSIBLE*/
 {
     .name 
     {
