@@ -1,7 +1,11 @@
 html,body{ 
   height: 100%;  
-
 }
+.main {
+    display: flex;
+    flex-direction: column;
+}
+
  /*LOGOS FOR SOCIAL MEDIA */
 .media ul {  /*PUTTING LOCATION OF WHERE THE SOCIAL MEDIA SHOULD BE*/
     position:absolute; 
@@ -12,6 +16,8 @@ html,body{
     transform: translate(-50%,-70%);
     display: flex;
 }
+
+
 
 .media ul li { /*SETTING MARGINS AND TAKING AWAY UGLY DOTS ON LIST*/
     list-style: none;
@@ -46,13 +52,14 @@ html,body{
     font-family: Segoe UI, Roboto, Arial, Helvetica, sans-serif;
     font-weight: bold;
     font-style: italic;
-    margin:0%;
+    margin-top: 30vh;
     padding: 0%;
+    text-align: center;
 
-    position:absolute; 
+   /* position:absolute; 
     left: 50%;
     top: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);*/
     
 }
 
@@ -63,13 +70,9 @@ html,body{
     font-family: Segoe UI, Helvetica, sans-serif;
     font-weight: bold;
     font-style: italic;
-    margin:0%;
+    margin-top: -10vh;
     padding: 0%;
-
-    position:absolute; 
-    left: 50%;
-    top: 60%;
-    transform: translate(-50%,-50%);
+    text-align: center;
 }
 
 
