@@ -1,9 +1,78 @@
 html,body{ 
+
   height: 100%;  
 }
 .main {
     display: flex;
     flex-direction: column;
+}
+/*BREAK POINTS */
+/*RESPONSIVENESS */
+
+@media (max-width: 900px) /*SMALLEST SCREEN POSSIBLE */
+{
+    .name 
+    {
+         font-size: 35px;
+         margin-top: 30vh;
+         padding: 0%;  
+    }
+
+    .desc1
+   {
+        margin-top: -8vh;
+        padding: 0%;
+        font-size: 15px;
+   }
+}
+
+@media (min-width: 901px) /*2nd SMALLEST SCREEN POSSIBLE*/
+{
+    .name 
+    {
+         font-size: 45px;
+         margin-top: 30vh;
+         padding: 0%;  
+    }
+
+    .desc1
+   {
+        margin-top: -10vh;
+        padding: 0%;
+        font-size: 15px;
+   }
+}
+
+@media (min-width: 1200px) /*3rd SMALLEST SCREEN POSSIBLE*/
+{
+    .name 
+    {
+         font-size: 45px;
+         margin-top: 25vh;
+         padding: 0%;  
+    }
+
+    .desc1
+   {
+        margin-top: -10vh;
+        padding: 0%;
+        font-size: 15px;
+   }
+}
+
+@media (min-width: 1800px) /*4th SMALLEST SCREEN POSSIBLE*/
+{
+  .name 
+   {
+        font-size: 64px;
+        margin-top: 30vh;
+       
+   }
+    .desc1
+   {
+        margin-top: -10vh;
+        font-size: 24px;
+   }
 }
 
  /*LOGOS FOR SOCIAL MEDIA */
@@ -16,8 +85,6 @@ html,body{
     transform: translate(-50%,-70%);
     display: flex;
 }
-
-
 
 .media ul li { /*SETTING MARGINS AND TAKING AWAY UGLY DOTS ON LIST*/
     list-style: none;
@@ -48,30 +115,18 @@ html,body{
 }
 .name {
     color :white;
-    font-size: 64px;
     font-family: Segoe UI, Roboto, Arial, Helvetica, sans-serif;
     font-weight: bold;
     font-style: italic;
-    margin-top: 30vh;
-    padding: 0%;
     text-align: center;
-
-   /* position:absolute; 
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);*/
-    
 }
 
 .desc1{  
     position: relative;
     color :white;
-    font-size: 24px;
     font-family: Segoe UI, Helvetica, sans-serif;
     font-weight: bold;
     font-style: italic;
-    margin-top: -10vh;
-    padding: 0%;
     text-align: center;
 }
 
@@ -82,3 +137,4 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
 }
+
