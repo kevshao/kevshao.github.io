@@ -9,6 +9,26 @@ html,body{
 /*BREAK POINTS */
 /*RESPONSIVENESS */
 
+@media only screen 
+    and (device-width : 375px) 
+    and (device-height : 667px) 
+    and (-webkit-device-pixel-ratio : 2) {
+        .name 
+        {
+             font-size: 35px;
+             margin-top: 20vh;
+             padding: 0%;  
+        }
+    
+        .desc1
+       {
+            margin-top: -10vh;
+            padding: 0%;
+            font-size: 15px;
+       } 
+
+    }
+
 @media (max-width: 600px) /*SMALLEST SCREEN POSSIBLE */
 {
     .name 
