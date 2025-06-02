@@ -1,166 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
+<html>
+
 <head>
-  <meta charset="UTF-8">
-  <title>Download VBA Code</title>
+    <!--Meta-->
+    <meta http-equiv="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel ="stylesheet" href = "style.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 </head>
 <body>
-  <h2>Download VBA Script</h2>
-  <button onclick="downloadVBA()">Download .txt</button>
+    <!-- <nav class = "navbar">
+        <ul>
+            <li><a href = "#home">Home</a></li>
+            <li><a href = "#about">About Me</a></li>
+            <li><a href = "#portfolio">Portfolio</a></li>
+            <li><a href = "#contact">Contact Me</a></li>
+        </ul>
+    </nav>-->
+    <section id="home">
+        <div class = "main">
+            <h1 class = "headings">Website Under Construction :)</h1>
+            <!--  <button class = "btn">
+                Resume
+            </button>––>
+                 -->
+        </div>
+<!--     </section>
+    <section id="about">
+        <h1 class = "headings"> ABOUT ME</h1>
+        <div id ="pic">
+            <img src="me.jpg" alt="">
+            <div id ="intro">
+                <h2>Kevin Shao</h2>
+                <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius recusandae aperiam porro expedita sed perspiciatis molestiae quis asperiores a pariatur voluptate inventore doloribus molestias, iure obcaecati minima illum nihil autem officiis, deserunt necessitatibus distinctio? Quia, aliquam. Magni incidunt esse nesciunt quae laudantium ad voluptatibus accusantium eum iste. Iste modi incidunt necessitatibus hic ipsa culpa. Dignissimos laboriosam quis mollitia illo, dolores et itaque explicabo ullam hic quas aut? Vel, atque dolorum excepturi nisi deserunt dolor magni est eveniet repudiandae cupiditate, harum ipsam culpa! Praesentium, facere ratione consequuntur commodi ipsum harum, hic molestiae doloribus exercitationem suscipit optio, possimus tempora? Eos, ea non!
+                </p>
+            </div>
+        </div>
+    </section>
+    <section id="portfolio">
+        <h1 class="headings">Portfioio</h1>
+        <div class ="gallery">
+            <img src = "port" alt = "">
+            <img src = "port" alt = "">
+            <img src = "port" alt = "">
+            <img src = "port" alt = "">
+            <img src = "port" alt = "">
+        </div>
+    </section>
+    <section id="contact">
+        <h1 class = "headings"> CONTACT</h1>
+        <form action ="" class = "form"> 
+            <input type = "text" name="name" id ="input" placeholder = "Enter Your Name">
+            <input type = "email" name = "email" id = "input" placeholder = "Enter Your Email">
+            <textarea name = "msg" id ="msg" cols ="30" rows = "10" placeholder = "Enter Your Message"></textarea>
 
-  <script>
-    function downloadVBA() {
-      const vbaCode = `
-Sub GenerateOrgChartTree()
-    Dim ws As Worksheet
-    Set ws = ThisWorkbook.Sheets(1)
+            <input type= "submit" value = "SEND" id = "send">
+            
+        </form>
+    </section>-->
+    <div class = "media">
+        <ul>
+            <li><a href="https://github.com/kevshao"9target="_blank"><i class="fa fa-github"></i></a></li>
 
-    Dim lastRow As Long
-    lastRow = ws.Cells(ws.Rows.Count, 2).End(xlUp).Row
+            <li><a href="https://www.linkedin.com/in/kevin-shao-695770188/"target="_blank"><i class="fa fa-linkedin"></i></a></li>
 
-    Dim nameToManager As Object
-    Set nameToManager = CreateObject("Scripting.Dictionary")
+            <li><a href="https://www.instagram.com/kev.shao/" target="_blank"><i class="fa fa-instagram"></i></a></li>
 
-    Dim managerToReports As Object
-    Set managerToReports = CreateObject("Scripting.Dictionary")
-
-    Dim i As Long
-    Dim name As String, manager As String
-
-    ' Populate dictionaries
-    For i = 2 To lastRow
-        name = Trim(ws.Cells(i, 2).Value)
-        manager = Trim(ws.Cells(i, 3).Value)
-        
-        nameToManager(name) = manager
-        
-        If Not managerToReports.exists(manager) Then
-            managerToReports(manager) = Array()
-        End If
-        
-        Dim reportsArray() As Variant
-        reportsArray = managerToReports(manager)
-        ReDim Preserve reportsArray(UBound(reportsArray) + 1)
-        reportsArray(UBound(reportsArray)) = name
-        managerToReports(manager) = reportsArray
-    Next i
-
-    ' Start from the top-level manager (e.g. Rosalin Sinha)
-    Debug.Print "Org Chart Tree:"
-    PrintSubordinates "Rosalin Sinha", managerToReports, 0
-End Sub
-
-Sub PrintSubordinates(manager As String, managerToReports As Object, indentLevel As Integer)
-    Dim i As Long
-    Dim indent As String
-    indent = String(indentLevel * 4, " ")
-
-    Debug.Print indent & manager
-
-    If managerToReports.exists(manager) Then
-        Dim reports() As Variant
-        reports = managerToReports(manager)
-
-        For i = 0 To UBound(reports)
-            PrintSubordinates reports(i), managerToReports, indentLevel + 1
-        Next i
-    End If
-End Sub
-
-
-
-Sub CreateVisioOrgChart()
-    Dim ws As Worksheet
-    Set ws = ThisWorkbook.Sheets(1)
-
-    Dim lastRow As Long
-    lastRow = ws.Cells(ws.Rows.Count, 2).End(xlUp).Row
-
-    Dim visioApp As Object, visioDoc As Object, visioPage As Object
-    Set visioApp = CreateObject("Visio.Application")
-    visioApp.Visible = True
-    Set visioDoc = visioApp.Documents.Add("")
-    Set visioPage = visioDoc.Pages(1)
-
-    Dim stencil As Object
-    Set stencil = visioApp.Documents.OpenEx("basic_u.vssx", 64) ' Open Basic Shapes stencil
-
-    Dim boxMaster As Object
-    Set boxMaster = stencil.Masters("Rectangle")
-
-    Dim shapeDict As Object
-    Set shapeDict = CreateObject("Scripting.Dictionary")
-
-    Dim managerToReports As Object
-    Set managerToReports = CreateObject("Scripting.Dictionary")
-
-    Dim name As String, manager As String
-    Dim i As Long
-    Dim nameX As Double, nameY As Double
-    Dim spacingX As Double, spacingY As Double
-    spacingX = 2.5
-    spacingY = 1.5
-
-    ' Build report structure
-    For i = 2 To lastRow
-        name = Trim(ws.Cells(i, 2).Value)
-        manager = Trim(ws.Cells(i, 3).Value)
-
-        If Not managerToReports.exists(manager) Then
-            managerToReports(manager) = Array()
-        End If
-
-        Dim arr() As Variant
-        arr = managerToReports(manager)
-        ReDim Preserve arr(UBound(arr) + 1)
-        arr(UBound(arr)) = name
-        managerToReports(manager) = arr
-    Next i
-
-    ' Start placing from top-level manager
-    Call PlaceNode("Rosalin Sinha", 0, 5, visioPage, boxMaster, managerToReports, shapeDict, spacingX, spacingY)
-End Sub
-
-Sub PlaceNode(name As String, level As Integer, centerX As Double, _
-              visioPage As Object, boxMaster As Object, _
-              managerToReports As Object, shapeDict As Object, _
-              spacingX As Double, spacingY As Double)
-
-    ' Create shape for this person
-    Dim shape As Object
-    Set shape = visioPage.Drop(boxMaster, centerX, -level * spacingY)
-    shape.Text = name
-    shapeDict(name) = shape
-
-    ' Handle direct reports
-    If managerToReports.exists(name) Then
-        Dim reports() As Variant
-        reports = managerToReports(name)
-        Dim totalReports As Integer: totalReports = UBound(reports) - LBound(reports) + 1
-
-        Dim i As Integer, childX As Double
-        For i = 0 To UBound(reports)
-            childX = centerX + (i - totalReports / 2) * spacingX
-            Call PlaceNode(reports(i), level + 1, childX, visioPage, boxMaster, managerToReports, shapeDict, spacingX, spacingY)
-
-            ' Draw connector
-            Dim conn As Object
-            Set conn = visioPage.Drop(visioPage.Application.ConnectorToolDataObject, 0, 0)
-            conn.CellsU("BeginX").GlueTo shapeDict(name).CellsU("PinX")
-            conn.CellsU("EndX").GlueTo shapeDict(reports(i)).CellsU("PinX")
-        Next i
-    End If
-End Sub
-
-`;
-
-      const blob = new Blob([vbaCode], { type: 'text/plain' });
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = 'CreateVisioOrgChart.vba.txt';
-      link.click();
-      URL.revokeObjectURL(link.href);
-    }
-  </script>
+            <li><a href="mailto:kevinshao@hotmail.ca"target="_blank"><i class="fa fa-envelope"></i></a></li>
+        </ul>
+  <!--   </div>
+    <div class="animation-area">
+        <ul class = "box-area">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
 </body>
-</html>
+</html>-->
