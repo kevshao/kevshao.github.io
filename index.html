@@ -1,193 +1,127 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-<html>
-
+<html lang="en">
 <head>
-    <!--Meta-->
-    <meta http-equiv="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel ="stylesheet" href = "style.css">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <title>Download VBA Code</title>
 </head>
 <body>
-    <!-- <nav class = "navbar">
-        <ul>
-            <li><a href = "#home">Home</a></li>
-            <li><a href = "#about">About Me</a></li>
-            <li><a href = "#portfolio">Portfolio</a></li>
-            <li><a href = "#contact">Contact Me</a></li>
-        </ul>
-    </nav>-->
-    <section id="home">
-        <div class = "main">
-            <h1 class = "headings">Sub CreateVisioOrgChartFromExcel()
-                Dim visioApp As Object
-                Dim visioDoc As Object
-                Dim visioPage As Object
-                Dim visioStencil As Object
-                Dim shapeDict As Object
-                Dim connector As Object
-                Dim ws As Worksheet
-                Dim lastRow As Long
-                Dim name As String, manager As String, title As String
-                Dim i As Long
-                Dim employeeShape As Object, managerShape As Object
-                Dim levelDict As Object, level As Integer
-                Dim rowOffset As Long
-                Dim nameToRow As Object
-                Dim xSpacing As Double, ySpacing As Double
-                Dim nameCol&, mgrCol&, titleCol&
-            
-                Set ws = ThisWorkbook.Sheets(1)
-                
-                nameCol = 1  ' Column A = Name
-                mgrCol = 2   ' Column B = Manager
-                titleCol = 3 ' Column C = Title
-                
-                lastRow = ws.Cells(ws.Rows.Count, nameCol).End(xlUp).Row
-            
-                Set visioApp = CreateObject("Visio.Application")
-                visioApp.Visible = True
-                Set visioDoc = visioApp.Documents.Add("")
-                Set visioPage = visioDoc.Pages(1)
-                Set visioStencil = visioApp.Documents.OpenEx("BASIC_U.VSSX", 64) ' Hidden
-                Set shapeDict = CreateObject("Scripting.Dictionary")
-                Set levelDict = CreateObject("Scripting.Dictionary")
-                Set nameToRow = CreateObject("Scripting.Dictionary")
-            
-                ' First pass: identify levels and row mapping
-                For i = 2 To lastRow
-                    name = Trim(ws.Cells(i, nameCol).Value)
-                    manager = Trim(ws.Cells(i, mgrCol).Value)
-                    nameToRow(name) = i
-                    If manager = "" Then
-                        levelDict(name) = 0 ' CEO level
-                    End If
-                Next i
-            
-                ' Propagate levels
-                Dim changed As Boolean
-                Do
-                    changed = False
-                    For i = 2 To lastRow
-                        name = Trim(ws.Cells(i, nameCol).Value)
-                        manager = Trim(ws.Cells(i, mgrCol).Value)
-                        If manager <> "" And levelDict.Exists(manager) Then
-                            If Not levelDict.Exists(name) Then
-                                levelDict(name) = levelDict(manager) + 1
-                                changed = True
-                            End If
-                        End If
-                    Next i
-                Loop While changed
-            
-                ' Second pass: drop shapes with spacing
-                xSpacing = 2.5
-                ySpacing = 1.5
-                Dim levelCounts As Object
-                Set levelCounts = CreateObject("Scripting.Dictionary")
-            
-                For i = 2 To lastRow
-                    name = Trim(ws.Cells(i, nameCol).Value)
-                    title = Trim(ws.Cells(i, titleCol).Value)
-                    level = levelDict(name)
-                    
-                    If Not levelCounts.Exists(level) Then levelCounts(level) = 0
-                    Dim colIndex As Long: colIndex = levelCounts(level)
-                    
-                    Dim x As Double, y As Double
-                    x = colIndex * xSpacing
-                    y = -level * ySpacing
-                    
-                    Set employeeShape = visioPage.Drop(visioStencil.Masters("Rectangle"), x, y)
-                    employeeShape.Text = name & vbCrLf & title
-                    employeeShape.CellsU("Width").Result("in") = 2
-                    employeeShape.CellsU("Height").Result("in") = 1
-                    
-                    shapeDict(name) = employeeShape
-                    levelCounts(level) = colIndex + 1
-                Next i
-            
-                ' Third pass: connect shapes
-                For i = 2 To lastRow
-                    name = Trim(ws.Cells(i, nameCol).Value)
-                    manager = Trim(ws.Cells(i, mgrCol).Value)
-                    
-                    If manager <> "" And shapeDict.Exists(manager) Then
-                        Set employeeShape = shapeDict(name)
-                        Set managerShape = shapeDict(manager)
-                        
-                        Set connector = visioPage.Drop(visioApp.ConnectorToolDataObject, 0, 0)
-                        connector.CellsU("BeginX").GlueTo(managerShape.CellsU("PinX"))
-                        connector.CellsU("EndX").GlueTo(employeeShape.CellsU("PinX"))
-                    End If
-                Next i
-            
-                visioStencil.Close
-                MsgBox "Org chart created successfully!"
-            End Sub
-            </h1>
-            <!--  <button class = "btn">
-                Resume
-            </button>––>
-                 -->
-        </div>
-<!--     </section>
-    <section id="about">
-        <h1 class = "headings"> ABOUT ME</h1>
-        <div id ="pic">
-            <img src="me.jpg" alt="">
-            <div id ="intro">
-                <h2>Kevin Shao</h2>
-                <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius recusandae aperiam porro expedita sed perspiciatis molestiae quis asperiores a pariatur voluptate inventore doloribus molestias, iure obcaecati minima illum nihil autem officiis, deserunt necessitatibus distinctio? Quia, aliquam. Magni incidunt esse nesciunt quae laudantium ad voluptatibus accusantium eum iste. Iste modi incidunt necessitatibus hic ipsa culpa. Dignissimos laboriosam quis mollitia illo, dolores et itaque explicabo ullam hic quas aut? Vel, atque dolorum excepturi nisi deserunt dolor magni est eveniet repudiandae cupiditate, harum ipsam culpa! Praesentium, facere ratione consequuntur commodi ipsum harum, hic molestiae doloribus exercitationem suscipit optio, possimus tempora? Eos, ea non!
-                </p>
-            </div>
-        </div>
-    </section>
-    <section id="portfolio">
-        <h1 class="headings">Portfioio</h1>
-        <div class ="gallery">
-            <img src = "port" alt = "">
-            <img src = "port" alt = "">
-            <img src = "port" alt = "">
-            <img src = "port" alt = "">
-            <img src = "port" alt = "">
-        </div>
-    </section>
-    <section id="contact">
-        <h1 class = "headings"> CONTACT</h1>
-        <form action ="" class = "form"> 
-            <input type = "text" name="name" id ="input" placeholder = "Enter Your Name">
-            <input type = "email" name = "email" id = "input" placeholder = "Enter Your Email">
-            <textarea name = "msg" id ="msg" cols ="30" rows = "10" placeholder = "Enter Your Message"></textarea>
+  <h2>Download VBA Script</h2>
+  <button onclick="downloadVBA()">Download .txt</button>
 
-            <input type= "submit" value = "SEND" id = "send">
+  <script>
+    function downloadVBA() {
+      const vbaCode = `
+Sub CreateVisioOrgChartFromExcel()
+    Dim visioApp As Object
+    Dim visioDoc As Object
+    Dim visioPage As Object
+    Dim visioStencil As Object
+    Dim shapeDict As Object
+    Dim connector As Object
+    Dim ws As Worksheet
+    Dim lastRow As Long
+    Dim name As String, manager As String, title As String
+    Dim i As Long
+    Dim employeeShape As Object, managerShape As Object
+    Dim levelDict As Object, level As Integer
+    Dim rowOffset As Long
+    Dim nameToRow As Object
+    Dim xSpacing As Double, ySpacing As Double
+    Dim nameCol&, mgrCol&, titleCol&
+
+    Set ws = ThisWorkbook.Sheets(1)
+    
+    nameCol = 1
+    mgrCol = 2
+    titleCol = 3
+    
+    lastRow = ws.Cells(ws.Rows.Count, nameCol).End(xlUp).Row
+
+    Set visioApp = CreateObject("Visio.Application")
+    visioApp.Visible = True
+    Set visioDoc = visioApp.Documents.Add("")
+    Set visioPage = visioDoc.Pages(1)
+    Set visioStencil = visioApp.Documents.OpenEx("BASIC_U.VSSX", 64)
+    Set shapeDict = CreateObject("Scripting.Dictionary")
+    Set levelDict = CreateObject("Scripting.Dictionary")
+    Set nameToRow = CreateObject("Scripting.Dictionary")
+
+    For i = 2 To lastRow
+        name = Trim(ws.Cells(i, nameCol).Value)
+        manager = Trim(ws.Cells(i, mgrCol).Value)
+        nameToRow(name) = i
+        If manager = "" Then
+            levelDict(name) = 0
+        End If
+    Next i
+
+    Dim changed As Boolean
+    Do
+        changed = False
+        For i = 2 To lastRow
+            name = Trim(ws.Cells(i, nameCol).Value)
+            manager = Trim(ws.Cells(i, mgrCol).Value)
+            If manager <> "" And levelDict.Exists(manager) Then
+                If Not levelDict.Exists(name) Then
+                    levelDict(name) = levelDict(manager) + 1
+                    changed = True
+                End If
+            End If
+        Next i
+    Loop While changed
+
+    xSpacing = 2.5
+    ySpacing = 1.5
+    Dim levelCounts As Object
+    Set levelCounts = CreateObject("Scripting.Dictionary")
+
+    For i = 2 To lastRow
+        name = Trim(ws.Cells(i, nameCol).Value)
+        title = Trim(ws.Cells(i, titleCol).Value)
+        level = levelDict(name)
+        
+        If Not levelCounts.Exists(level) Then levelCounts(level) = 0
+        Dim colIndex As Long: colIndex = levelCounts(level)
+        
+        Dim x As Double, y As Double
+        x = colIndex * xSpacing
+        y = -level * ySpacing
+        
+        Set employeeShape = visioPage.Drop(visioStencil.Masters("Rectangle"), x, y)
+        employeeShape.Text = name & vbCrLf & title
+        employeeShape.CellsU("Width").Result("in") = 2
+        employeeShape.CellsU("Height").Result("in") = 1
+        
+        shapeDict(name) = employeeShape
+        levelCounts(level) = colIndex + 1
+    Next i
+
+    For i = 2 To lastRow
+        name = Trim(ws.Cells(i, nameCol).Value)
+        manager = Trim(ws.Cells(i, mgrCol).Value)
+        
+        If manager <> "" And shapeDict.Exists(manager) Then
+            Set employeeShape = shapeDict(name)
+            Set managerShape = shapeDict(manager)
             
-        </form>
-    </section>-->
-    <div class = "media">
-        <ul>
-            <li><a href="https://github.com/kevshao"9target="_blank"><i class="fa fa-github"></i></a></li>
+            Set connector = visioPage.Drop(visioApp.ConnectorToolDataObject, 0, 0)
+            connector.CellsU("BeginX").GlueTo(managerShape.CellsU("PinX"))
+            connector.CellsU("EndX").GlueTo(employeeShape.CellsU("PinX"))
+        End If
+    Next i
 
-            <li><a href="https://www.linkedin.com/in/kevin-shao-695770188/"target="_blank"><i class="fa fa-linkedin"></i></a></li>
+    visioStencil.Close
+    MsgBox "Org chart created successfully!"
+End Sub
+`;
 
-            <li><a href="https://www.instagram.com/kev.shao/" target="_blank"><i class="fa fa-instagram"></i></a></li>
-
-            <li><a href="mailto:kevinshao@hotmail.ca"target="_blank"><i class="fa fa-envelope"></i></a></li>
-        </ul>
-  <!--   </div>
-    <div class="animation-area">
-        <ul class = "box-area">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
-    </div>
+      const blob = new Blob([vbaCode], { type: 'text/plain' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'CreateVisioOrgChart.vba.txt';
+      link.click();
+      URL.revokeObjectURL(link.href);
+    }
+  </script>
 </body>
-</html>-->
+</html>
