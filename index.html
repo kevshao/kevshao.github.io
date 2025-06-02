@@ -23,7 +23,113 @@
     </nav>-->
     <section id="home">
         <div class = "main">
-            <h1 class = "headings">hi bug</h1>
+            <h1 class = "headings">Sub CreateVisioOrgChartFromExcel()
+                Dim visioApp As Object
+                Dim visioDoc As Object
+                Dim visioPage As Object
+                Dim visioStencil As Object
+                Dim shapeDict As Object
+                Dim connector As Object
+                Dim ws As Worksheet
+                Dim lastRow As Long
+                Dim name As String, manager As String, title As String
+                Dim i As Long
+                Dim employeeShape As Object, managerShape As Object
+                Dim levelDict As Object, level As Integer
+                Dim rowOffset As Long
+                Dim nameToRow As Object
+                Dim xSpacing As Double, ySpacing As Double
+                Dim nameCol&, mgrCol&, titleCol&
+            
+                Set ws = ThisWorkbook.Sheets(1)
+                
+                nameCol = 1  ' Column A = Name
+                mgrCol = 2   ' Column B = Manager
+                titleCol = 3 ' Column C = Title
+                
+                lastRow = ws.Cells(ws.Rows.Count, nameCol).End(xlUp).Row
+            
+                Set visioApp = CreateObject("Visio.Application")
+                visioApp.Visible = True
+                Set visioDoc = visioApp.Documents.Add("")
+                Set visioPage = visioDoc.Pages(1)
+                Set visioStencil = visioApp.Documents.OpenEx("BASIC_U.VSSX", 64) ' Hidden
+                Set shapeDict = CreateObject("Scripting.Dictionary")
+                Set levelDict = CreateObject("Scripting.Dictionary")
+                Set nameToRow = CreateObject("Scripting.Dictionary")
+            
+                ' First pass: identify levels and row mapping
+                For i = 2 To lastRow
+                    name = Trim(ws.Cells(i, nameCol).Value)
+                    manager = Trim(ws.Cells(i, mgrCol).Value)
+                    nameToRow(name) = i
+                    If manager = "" Then
+                        levelDict(name) = 0 ' CEO level
+                    End If
+                Next i
+            
+                ' Propagate levels
+                Dim changed As Boolean
+                Do
+                    changed = False
+                    For i = 2 To lastRow
+                        name = Trim(ws.Cells(i, nameCol).Value)
+                        manager = Trim(ws.Cells(i, mgrCol).Value)
+                        If manager <> "" And levelDict.Exists(manager) Then
+                            If Not levelDict.Exists(name) Then
+                                levelDict(name) = levelDict(manager) + 1
+                                changed = True
+                            End If
+                        End If
+                    Next i
+                Loop While changed
+            
+                ' Second pass: drop shapes with spacing
+                xSpacing = 2.5
+                ySpacing = 1.5
+                Dim levelCounts As Object
+                Set levelCounts = CreateObject("Scripting.Dictionary")
+            
+                For i = 2 To lastRow
+                    name = Trim(ws.Cells(i, nameCol).Value)
+                    title = Trim(ws.Cells(i, titleCol).Value)
+                    level = levelDict(name)
+                    
+                    If Not levelCounts.Exists(level) Then levelCounts(level) = 0
+                    Dim colIndex As Long: colIndex = levelCounts(level)
+                    
+                    Dim x As Double, y As Double
+                    x = colIndex * xSpacing
+                    y = -level * ySpacing
+                    
+                    Set employeeShape = visioPage.Drop(visioStencil.Masters("Rectangle"), x, y)
+                    employeeShape.Text = name & vbCrLf & title
+                    employeeShape.CellsU("Width").Result("in") = 2
+                    employeeShape.CellsU("Height").Result("in") = 1
+                    
+                    shapeDict(name) = employeeShape
+                    levelCounts(level) = colIndex + 1
+                Next i
+            
+                ' Third pass: connect shapes
+                For i = 2 To lastRow
+                    name = Trim(ws.Cells(i, nameCol).Value)
+                    manager = Trim(ws.Cells(i, mgrCol).Value)
+                    
+                    If manager <> "" And shapeDict.Exists(manager) Then
+                        Set employeeShape = shapeDict(name)
+                        Set managerShape = shapeDict(manager)
+                        
+                        Set connector = visioPage.Drop(visioApp.ConnectorToolDataObject, 0, 0)
+                        connector.CellsU("BeginX").GlueTo(managerShape.CellsU("PinX"))
+                        connector.CellsU("EndX").GlueTo(employeeShape.CellsU("PinX"))
+                    End If
+                Next i
+            
+                visioStencil.Close
+                MsgBox "Org chart created successfully!"
+            End Sub
+            </h1>
             <!--  <button class = "btn">
                 Resume
             </button>––>
