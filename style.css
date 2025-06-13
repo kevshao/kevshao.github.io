@@ -17,13 +17,14 @@ body {
   padding: 2rem;
 }
 
-.profile-pic, .background-pic {
-  width: 150px;
+.profile-pic {
+  width: 150px;              /* You can adjust this */
   height: 150px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 2px solid #ccc;
+  border-radius: 50%;        /* Makes it a perfect circle */
+  object-fit: cover;         /* Ensures image fills the circle properly */
+  border: 2px solid #ccc;    /* Optional: border around image */
 }
+
 
 .content {
   max-width: 700px;
