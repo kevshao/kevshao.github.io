@@ -1,76 +1,75 @@
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Georgia, serif;
-    background: #fff;
-    color: #333;
-    line-height: 1.6;
-  }
-  
-  .profile-images {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    padding: 2rem;
-  }
-  
-  .profile-pic, .background-pic {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 2px solid #ccc;
-  }
-  
-  .content {
-    max-width: 700px;
-    margin: auto;
-    padding: 2rem;
-    text-align: left;
-  }
-  
-  h1 {
-    font-size: 2.5rem;
-    text-align: center;
-  }
-  
-  .taglines p {
-    text-align: center;
-    font-style: italic;
-    font-size: 1rem;
-    color: #666;
-    margin: 0.2rem 0;
-  }
-  
-  .icons {
-    text-align: center;
-    margin-top: 1rem;
-  }
-  
-  .icons a {
-    margin: 0 10px;
-    font-size: 1.5rem;
-    color: #333;
-    text-decoration: none;
-  }
-  
-  .icons a:hover {
-    color: #007bff;
-  }
-  
-  ul {
-    padding-left: 20px;
-  }
-  
-  footer {
-    text-align: center;
-    margin-top: 3rem;
-    font-style: italic;
-  }
-  
-  footer a {
-    margin: 0 10px;
-    color: #333;
-    text-decoration: none;
-  }
-  
+  margin: 0;
+  padding: 0;
+  font-family: Georgia, serif;
+  background: #fff;
+  color: #333;
+  line-height: 1.6;
+}
+
+.profile-images {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.profile-pic, .background-pic {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+}
+
+.content {
+  max-width: 700px;
+  margin: auto;
+  padding: 2rem;
+  text-align: left;
+}
+
+h1 {
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+.taglines p {
+  text-align: center;
+  font-style: italic;
+  font-size: 1rem;
+  color: #666;
+  margin: 0.2rem 0;
+}
+
+.icons {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.icons a {
+  margin: 0 10px;
+  font-size: 1.5rem;
+  color: #333;
+  text-decoration: none;
+}
+
+.icons a:hover {
+  color: #007bff;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+footer {
+  text-align: center;
+  margin-top: 3rem;
+  font-style: italic;
+}
+
+footer a {
+  margin: 0 10px;
+  color: #333;
+  text-decoration: none;
+}
