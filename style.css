@@ -1,11 +1,8 @@
 body {
-  background-color: #ffe4e1 !important;
-}
-body {
   margin: 0;
   padding: 0;
   font-family: Georgia, serif;
-  background: #fff;
+  background: #B0E0E6; /* Powder Blue */
   color: #333;
   line-height: 1.6;
 }
@@ -17,20 +14,22 @@ body {
   padding: 2rem;
 }
 
-.profile-pic {
-  width: 150px;              /* You can adjust this */
+.profile-pic, .background-pic {
+  width: 150px;
   height: 150px;
-  border-radius: 50%;        /* Makes it a perfect circle */
-  object-fit: cover;         /* Ensures image fills the circle properly */
-  border: 2px solid #ccc;    /* Optional: border around image */
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #ccc;
 }
-
 
 .content {
   max-width: 700px;
   margin: auto;
   padding: 2rem;
   text-align: left;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
 }
 
 h1 {
@@ -42,7 +41,7 @@ h1 {
   text-align: center;
   font-style: italic;
   font-size: 1rem;
-  color: #666;
+  color: #555;
   margin: 0.2rem 0;
 }
 
