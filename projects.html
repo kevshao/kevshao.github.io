@@ -1,14 +1,53 @@
-<!-- projects.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Projects – Kevin Shao</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="projects.css" />
 </head>
 <body>
-  <div class="content">
+  <header class="header">
     <h1>Projects</h1>
-    <p>Here are some of the personal and academic projects I've worked on...</p>
-  </div>
+    <p>A collection of my work across internships, classes, and side hustles.</p>
+  </header>
+
+  <section class="grid">
+    <div class="card">
+      <img src="amd_project.jpg" alt="AMD Intern Project">
+      <div class="text">
+        <h2>Performance Automation at AMD</h2>
+        <p>Built internal tooling to measure GPU performance, detect regressions, and automate benchmarks at scale.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="ai_detection.jpg" alt="AI Project">
+      <div class="text">
+        <h2>AI for Depression Detection</h2>
+        <p>Used scikit-learn and decision trees to analyze student survey data for early depression prediction.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="web_tracker.jpg" alt="Web App">
+      <div class="text">
+        <h2>Pokémon Card Tracker</h2>
+        <p>A responsive web app to track card inventory, pricing trends, and recent sales using Firebase.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="nnu_net.jpg" alt="Medical AI Project">
+      <div class="text">
+        <h2>Pancreas Segmentation with nnUNet</h2>
+        <p>Customized a multi-task deep learning model to classify and segment CT images using nnUNetv2.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p><a href="index.html">← Back to main page</a></p>
+  </footer>
 </body>
 </html>
