@@ -53,7 +53,7 @@ body {
 .timeline-content {
   background: white;
   border-radius: 8px;
-  padding: 1rem;
+  padding: 1.25rem;
   position: relative;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
@@ -61,13 +61,27 @@ body {
 .timeline-date {
   font-weight: bold;
   color: #2a9d8f;
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.35rem;
+  margin-bottom: 0.75rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.timeline-date::before {
+  content: '';
+  width: 14px;
+  height: 14px;
+  background: #2a9d8f;
+  border-radius: 50%;
+  position: absolute;
+  left: -28px;
+  top: 4px;
 }
 
 .timeline-content h2 {
   margin: 0.5rem 0;
   color: #222;
+  font-size: 1.3rem;
 }
 
 .timeline-content p {
@@ -83,28 +97,7 @@ body {
   margin-bottom: 0.75rem;
 }
 
-/* Connectors */
-.timeline-item.left::before,
-.timeline-item.right::before {
-  content: '';
-  position: absolute;
-  top: 24px;
-  width: 12px;
-  height: 12px;
-  background: #2a9d8f;
-  border-radius: 50%;
-  z-index: 1;
-}
-
-.timeline-item.left::before {
-  right: -6px;
-}
-
-.timeline-item.right::before {
-  left: -6px;
-}
-
-/* Responsive */
+/* Responsive behavior */
 @media screen and (max-width: 768px) {
   .timeline::before {
     left: 8px;
@@ -121,8 +114,7 @@ body {
     left: 0;
   }
 
-  .timeline-item.left::before,
-  .timeline-item.right::before {
-    left: -6px;
+  .timeline-date::before {
+    left: -18px;
   }
 }
