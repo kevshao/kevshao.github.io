@@ -1,0 +1,47 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 2rem;
+}
+
+.timeline {
+  max-width: 600px;
+  margin: auto;
+  padding-left: 1rem;
+  border-left: 4px solid #2a9d8f;
+  position: relative;
+}
+
+.year {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2a9d8f;
+  margin-top: 2rem;
+  position: relative;
+}
+
+.year::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  background: #2a9d8f;
+  border-radius: 50%;
+  position: absolute;
+  left: -11px;
+  top: 8px;
+}
+
+.month {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+  margin: 1rem 0 0.25rem 0;
+}
+
+.event {
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  color: #555;
+}
