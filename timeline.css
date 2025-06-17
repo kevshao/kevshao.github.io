@@ -67,7 +67,8 @@ body {
   padding-left: 1.5rem;
 }
 
-.timeline-date::before {
+/* Dots on correct inner edge */
+.timeline-item.right .timeline-date::before {
   content: '';
   width: 14px;
   height: 14px;
@@ -75,6 +76,17 @@ body {
   border-radius: 50%;
   position: absolute;
   left: -28px;
+  top: 4px;
+}
+
+.timeline-item.left .timeline-date::before {
+  content: '';
+  width: 14px;
+  height: 14px;
+  background: #2a9d8f;
+  border-radius: 50%;
+  position: absolute;
+  right: -28px;
   top: 4px;
 }
 
@@ -114,7 +126,8 @@ body {
     left: 0;
   }
 
-  .timeline-date::before {
+  .timeline-item .timeline-date::before {
     left: -18px;
+    right: auto;
   }
 }
