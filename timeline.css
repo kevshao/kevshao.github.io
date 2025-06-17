@@ -130,4 +130,16 @@ body {
     left: -18px;
     right: auto;
   }
+
+  footer {
+    text-align: center;
+    padding: 1rem;
+    font-style: italic;
+    background: #e6f2f7;
+  }
+  
+  footer a {
+    color: #004d66;
+    text-decoration: none;
+  }
 }
