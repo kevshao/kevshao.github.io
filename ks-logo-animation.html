@@ -3,16 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KS Intro</title>
+  <title>KS Logo Draw Animation</title>
   <link rel="stylesheet" href="ks-animate.css" />
-  <style>
-    body.fade-out {
-      animation: fadeOut 1s ease forwards;
-    }
-    @keyframes fadeOut {
-      to { opacity: 0; }
-    }
-  </style>
 </head>
 <body>
   <div class="logo-container">
@@ -20,17 +12,5 @@
       <text x="10" y="70" class="ks-text">KS</text>
     </svg>
   </div>
-
-  <script>
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        document.body.classList.add("fade-out");
-      }, 2200); // 2.2s = SVG animation + short pause
-
-      setTimeout(() => {
-        window.location.href = "index.html";
-      }, 3200); // Wait 1s after fade before redirect
-    });
-  </script>
 </body>
 </html>
