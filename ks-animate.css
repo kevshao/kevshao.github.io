@@ -1,0 +1,36 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.logo-container {
+  width: 200px;
+  height: 200px;
+}
+
+.ks-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ks-text {
+  fill: none;
+  stroke: #2a9d8f;
+  stroke-width: 2;
+  font-size: 60px;
+  font-family: 'Georgia', serif;
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: draw 2s ease forwards;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
