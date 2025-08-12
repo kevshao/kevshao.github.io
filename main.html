@@ -38,8 +38,7 @@
     .btn.primary { background:#111827; color:#fff; }
     .btn.ghost { background:#f3f4f6; color:#111827; }
     .error { color:#b91c1c; font-size:.9rem; min-height: 1.1rem; }
-    /* Optional: make the new tab look like others */
-    .content footer a#secure-download { font-weight: 600; }
+    .content footer a#secure-download {font-weight: normal; }
   </style>
 </head>
 <body>
@@ -82,13 +81,11 @@
         <a href="projects.html">projects</a>
         <a href="cooking.html">cooking album</a>
         <a href="timeline.html">timeline</a>
-        <!-- NEW: passworded download tab -->
         <a href="#" id="secure-download">private</a>
       </p>
     </footer>
   </main>
 
-  <!-- Modal -->
   <div class="modal-backdrop" id="pw-modal">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="pw-title">
       <h2 id="pw-title">Enter password</h2>
@@ -105,11 +102,9 @@
   </div>
 
   <script>
-    // ======= CONFIGURE THESE =======
-    const PASSWORD = 'ilovebugs';         // <-- put your password here
-    const FILE_URL = 'audit_manager.py';        // <-- file to download (relative path or full URL)
-    const DOWNLOAD_NAME = 'audit_manager.py';   // <-- name the browser will use for the file
-    // =================================
+    const PASSWORD = 'ilovebugs'; 
+    const FILE_URL = 'audit_manager.py'; 
+    const DOWNLOAD_NAME = 'audit_manager.py'; 
 
     const openBtn  = document.getElementById('secure-download');
     const modal    = document.getElementById('pw-modal');
@@ -132,8 +127,6 @@
       const a = document.createElement('a');
       a.href = url;
       a.setAttribute('download', name || '');
-      // If you use a cross-origin URL that doesn't permit download attribute,
-      // the browser will just navigate to it.
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -146,7 +139,7 @@
 
     cancelBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal(); // click outside to close
+      if (e.target === modal) closeModal();
     });
 
     form.addEventListener('submit', (e) => {
@@ -161,27 +154,9 @@
       }
     });
 
-    // Optional: ESC to close
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
     });
-
-    /**
-     * (Optional) Slightly-better client-side approach:
-     * - Instead of storing plaintext PASSWORD, store a SHA-256 hash
-     *   and compare hash(input) with the stored one. Still not secure, but
-     *   hides the exact password from a casual glance.
-     * - Requires a secure context (https or localhost).
-     * 
-     * Example:
-     * const PASSWORD_HASH = 'hexstring...';
-     * async function sha256Hex(str){ const buf = new TextEncoder().encode(str);
-     *   const hash = await crypto.subtle.digest('SHA-256', buf);
-     *   return [...new Uint8Array(hash)].map(b=>b.toString(16).padStart(2,'0')).join('');
-     * }
-     * // then in submit:
-     * const ok = crypto?.subtle ? (await sha256Hex(value) === PASSWORD_HASH) : (value === PASSWORD);
-     */
   </script>
 </body>
 </html>
