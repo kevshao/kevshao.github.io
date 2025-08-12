@@ -1,13 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kevin Shao</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-SOMEHASH" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="icon" type="image/png" href="kslogo.png">
-    </head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kevin Shao</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-SOMEHASH" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  <link rel="icon" type="image/png" href="kslogo.png"/>
+
+  <!-- Minimal modal styles (can move to style.css) -->
+  <style>
+    .modal-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.5);
+      display: none; align-items: center; justify-content: center;
+      z-index: 9999;
+    }
+    .modal {
+      background: #fff; width: min(92vw, 420px);
+      border-radius: 16px; padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.2);
+    }
+    .modal h2 { margin: 0 0 8px; font-size: 1.25rem; }
+    .modal p { margin: 0 0 12px; color: #555; }
+    .modal form { display: grid; gap: 12px; }
+    .modal input[type="password"] {
+      width: 100%; padding: 10px 12px; border-radius: 10px;
+      border: 1px solid #cfd6e4; font-size: 1rem;
+    }
+    .modal .actions {
+      display: flex; gap: 10px; justify-content: flex-end; margin-top: 4px;
+    }
+    .btn {
+      padding: 10px 14px; border-radius: 10px; border: none; cursor: pointer;
+      font-weight: 600;
+    }
+    .btn.primary { background:#111827; color:#fff; }
+    .btn.ghost { background:#f3f4f6; color:#111827; }
+    .error { color:#b91c1c; font-size:.9rem; min-height: 1.1rem; }
+    /* Optional: make the new tab look like others */
+    .content footer a#secure-download { font-weight: 600; }
+  </style>
+</head>
 <body>
   <div class="profile-images">
     <img src="me.jpg" alt="Kevin Photo" class="profile-pic">
@@ -43,13 +77,111 @@
     </ul>
 
     <footer>
-        <p>
-            <a href="Kevin_Shao_Resume.pdf" download target="_blank">resume</a>
-            <a href="projects.html">projects</a>
-            <a href="cooking.html">cooking album</a>
-            <a href="timeline.html">timeline</a>
-        </p>
+      <p>
+        <a href="Kevin_Shao_Resume.pdf" download target="_blank">resume</a>
+        <a href="projects.html">projects</a>
+        <a href="cooking.html">cooking album</a>
+        <a href="timeline.html">timeline</a>
+        <!-- NEW: passworded download tab -->
+        <a href="#" id="secure-download">private</a>
+      </p>
     </footer>
   </main>
+
+  <!-- Modal -->
+  <div class="modal-backdrop" id="pw-modal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="pw-title">
+      <h2 id="pw-title">Enter password</h2>
+      <p>Download will start after a correct password.</p>
+      <form id="pw-form">
+        <input type="password" id="pw-input" placeholder="Password" autocomplete="current-password" required />
+        <div class="error" id="pw-error"></div>
+        <div class="actions">
+          <button type="button" class="btn ghost" id="pw-cancel">Cancel</button>
+          <button type="submit" class="btn primary">Unlock & Download</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // ======= CONFIGURE THESE =======
+    const PASSWORD = 'CHANGE_ME';         // <-- put your password here
+    const FILE_URL = 'secret.pdf';        // <-- file to download (relative path or full URL)
+    const DOWNLOAD_NAME = 'secret.pdf';   // <-- name the browser will use for the file
+    // =================================
+
+    const openBtn  = document.getElementById('secure-download');
+    const modal    = document.getElementById('pw-modal');
+    const form     = document.getElementById('pw-form');
+    const input    = document.getElementById('pw-input');
+    const errorEl  = document.getElementById('pw-error');
+    const cancelBtn= document.getElementById('pw-cancel');
+
+    function openModal() {
+      modal.style.display = 'flex';
+      errorEl.textContent = '';
+      input.value = '';
+      setTimeout(() => input.focus(), 50);
+    }
+    function closeModal() {
+      modal.style.display = 'none';
+    }
+
+    function triggerDownload(url, name) {
+      const a = document.createElement('a');
+      a.href = url;
+      a.setAttribute('download', name || '');
+      // If you use a cross-origin URL that doesn't permit download attribute,
+      // the browser will just navigate to it.
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+
+    openBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal();
+    });
+
+    cancelBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal(); // click outside to close
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const value = input.value.trim();
+      if (value === PASSWORD) {
+        closeModal();
+        triggerDownload(FILE_URL, DOWNLOAD_NAME);
+      } else {
+        errorEl.textContent = 'Incorrect password. Please try again.';
+        input.select();
+      }
+    });
+
+    // Optional: ESC to close
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
+    });
+
+    /**
+     * (Optional) Slightly-better client-side approach:
+     * - Instead of storing plaintext PASSWORD, store a SHA-256 hash
+     *   and compare hash(input) with the stored one. Still not secure, but
+     *   hides the exact password from a casual glance.
+     * - Requires a secure context (https or localhost).
+     * 
+     * Example:
+     * const PASSWORD_HASH = 'hexstring...';
+     * async function sha256Hex(str){ const buf = new TextEncoder().encode(str);
+     *   const hash = await crypto.subtle.digest('SHA-256', buf);
+     *   return [...new Uint8Array(hash)].map(b=>b.toString(16).padStart(2,'0')).join('');
+     * }
+     * // then in submit:
+     * const ok = crypto?.subtle ? (await sha256Hex(value) === PASSWORD_HASH) : (value === PASSWORD);
+     */
+  </script>
 </body>
 </html>
